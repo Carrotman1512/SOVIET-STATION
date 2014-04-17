@@ -95,7 +95,7 @@ obj/machinery/atmospherics/trinary/mixer
 			return ..()
 		var/turf/T = src.loc
 		if (level==1 && isturf(T) && T.intact)
-			user << "\red You must remove the plating first."
+			user << "\red Сначала вы должны снЯть покрытие."
 			return 1
 		var/datum/gas_mixture/int_air = return_air()
 		var/datum/gas_mixture/env_air = loc.return_air()
@@ -118,21 +118,21 @@ obj/machinery/atmospherics/trinary/mixer
 			return
 		src.add_fingerprint(usr)
 		if(!src.allowed(user))
-			user << "\red Access denied."
+			user << "\red Доступ запрещен."
 			return
 		usr.set_machine(src)
-		var/dat = {"<b>Power: </b><a href='?src=\ref[src];power=1'>[on?"On":"Off"]</a><br>
-					<b>Desirable output pressure: </b>
+		var/dat = {"<b>Электропитание: </b><a href='?src=\ref[src];power=1'>[on?"Включено":"Отключено"]</a><br>
+					<b>Желаемое выходное давление: </b>
 					[target_pressure]kPa | <a href='?src=\ref[src];set_press=1'>Change</a>
 					<br>
-					<b>Node 1 Concentration:</b>
+					<b>КонцентрациЯ узла 1:</b>
 					<a href='?src=\ref[src];node1_c=-0.1'><b>-</b></a>
 					<a href='?src=\ref[src];node1_c=-0.01'>-</a>
 					[node1_concentration]([node1_concentration*100]%)
 					<a href='?src=\ref[src];node1_c=0.01'><b>+</b></a>
 					<a href='?src=\ref[src];node1_c=0.1'>+</a>
 					<br>
-					<b>Node 2 Concentration:</b>
+					<b>КонцентрациЯ узла 2:</b>
 					<a href='?src=\ref[src];node2_c=-0.1'><b>-</b></a>
 					<a href='?src=\ref[src];node2_c=-0.01'>-</a>
 					[node2_concentration]([node2_concentration*100]%)
@@ -149,7 +149,7 @@ obj/machinery/atmospherics/trinary/mixer
 		if(href_list["power"])
 			on = !on
 		if(href_list["set_press"])
-			var/new_pressure = input(usr,"Enter new output pressure (0-4500kPa)","Pressure control",src.target_pressure) as num
+			var/new_pressure = input(usr,"Введите новое выходное давление (0-4500kPa)","Управление давлением",src.target_pressure) as num
 			src.target_pressure = max(0, min(4500, new_pressure))
 		if(href_list["node1_c"])
 			var/value = text2num(href_list["node1_c"])
