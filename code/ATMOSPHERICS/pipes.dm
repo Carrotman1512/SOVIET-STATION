@@ -499,16 +499,16 @@ obj/machinery/atmospherics/pipe
 
 					var/unknown_concentration =  1-(o2_concentration+n2_concentration+co2_concentration+plasma_concentration)
 
-					user << "\blue Pressure: [round(pressure,0.1)] kPa"
-					user << "\blue Nitrogen: [round(n2_concentration*100)]%"
-					user << "\blue Oxygen: [round(o2_concentration*100)]%"
-					user << "\blue CO2: [round(co2_concentration*100)]%"
-					user << "\blue Plasma: [round(plasma_concentration*100)]%"
+					user << "\blue Давление: [round(pressure,0.1)] kPa"
+					user << "\blue Азот: [round(n2_concentration*100)]%"
+					user << "\blue Кислород: [round(o2_concentration*100)]%"
+					user << "\blue Углекислый газ: [round(co2_concentration*100)]%"
+					user << "\blue Плазма: [round(plasma_concentration*100)]%"
 					if(unknown_concentration>0.01)
-						user << "\red Unknown: [round(unknown_concentration*100)]%"
-					user << "\blue Temperature: [round(parent.air.temperature-T0C)]&deg;C"
+						user << "\red Неизвестно: [round(unknown_concentration*100)]%"
+					user << "\blue Температура: [round(parent.air.temperature-T0C)]&deg;C"
 				else
-					user << "\blue Tank is empty!"
+					user << "\blue Бак пуст!"
 
 	vent
 		icon = 'icons/obj/atmospherics/pipe_vent.dmi'
@@ -1125,7 +1125,7 @@ obj/machinery/atmospherics/pipe/attackby(var/obj/item/weapon/W as obj, var/mob/u
 		return ..()
 	var/turf/T = src.loc
 	if (level==1 && isturf(T) && T.intact)
-		user << "\red You must remove the plating first."
+		user << "\red Сначала вы должны снЯть покрытие."
 		return 1
 	var/datum/gas_mixture/int_air = return_air()
 	var/datum/gas_mixture/env_air = loc.return_air()
