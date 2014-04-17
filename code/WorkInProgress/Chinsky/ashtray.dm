@@ -20,7 +20,7 @@
 	if (istype(W,/obj/item/clothing/mask/cigarette) || istype(W, /obj/item/weapon/match))
 		if(user)
 			if (contents.len >= max_butts)
-				user << "This ashtray is full."
+				user << "Эта пепельница заполнена."
 				return
 			user.u_equip(W)
 			W.loc = src
@@ -42,10 +42,10 @@
 			add_fingerprint(user)
 			if (contents.len == max_butts)
 				icon_state = icon_full
-				desc = empty_desc + " It's stuffed full."
+				desc = empty_desc + " Она полностью набита пеплом."
 			else if (contents.len > max_butts/2)
 				icon_state = icon_half
-				desc = empty_desc + " It's half-filled."
+				desc = empty_desc + " Ее половина заполнена пеплом."
 	else
 		health = max(0,health - W.force)
 		user << "You hit [src] with [W]."
