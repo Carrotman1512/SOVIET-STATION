@@ -41,7 +41,7 @@
 /mob/dead/observer/proc/ManualFollow(var/atom/target)
 	following = target
 	if(target)
-		src << "\blue Now following [target]"
+		src << "\blue Следуем за [target]"
 		spawn(0)
 			var/turf/pos = get_turf(src)
 			while(loc == pos && target && following == target)
