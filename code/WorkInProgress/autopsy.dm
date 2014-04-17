@@ -1,4 +1,3 @@
-
 //moved these here from code/defines/obj/weapon.dm
 //please preference put stuff where it's easy to find - C
 
@@ -86,7 +85,7 @@
 	var/scan_data = ""
 
 	if(timeofdeath)
-		scan_data += "<b>Time of death:</b> [worldtime2text(timeofdeath)]<br><br>"
+		scan_data += "<b>ВремЯ смерти:</b> [worldtime2text(timeofdeath)]<br><br>"
 
 	var/n = 1
 	for(var/wdata_idx in wdata)
@@ -117,24 +116,24 @@
 		// total score happens to be the total damage
 		switch(total_score)
 			if(0)
-				damage_desc = "Unknown"
+				damage_desc = "Неизвестно"
 			if(1 to 5)
-				damage_desc = "<font color='green'>negligible</font>"
+				damage_desc = "<font color='green'>Незначительный</font>"
 			if(5 to 15)
-				damage_desc = "<font color='green'>light</font>"
+				damage_desc = "<font color='green'>Легкий</font>"
 			if(15 to 30)
-				damage_desc = "<font color='orange'>moderate</font>"
+				damage_desc = "<font color='orange'>Умеренный</font>"
 			if(30 to 1000)
-				damage_desc = "<font color='red'>severe</font>"
+				damage_desc = "<font color='red'>ТЯжелый</font>"
 
 		if(!total_score) total_score = D.organs_scanned.len
 
 		scan_data += "<b>Weapon #[n]</b><br>"
 		if(damaging_weapon)
-			scan_data += "Severity: [damage_desc]<br>"
-			scan_data += "Hits by weapon: [total_hits]<br>"
-		scan_data += "Approximate time of wound infliction: [worldtime2text(age)]<br>"
-		scan_data += "Affected limbs: [D.organ_names]<br>"
+			scan_data += "Тип урона: [damage_desc]<br>"
+			scan_data += "Выстрелов из оружиЯ: [total_hits]<br>"
+		scan_data += "Приблизительное времЯ получениЯ травм: [worldtime2text(age)]<br>"
+		scan_data += "Поврежденные конечности: [D.organ_names]<br>"
 		scan_data += "Possible weapons:<br>"
 		for(var/weapon_name in weapon_chances)
 			scan_data += "\t[100*weapon_chances[weapon_name]/total_score]% [weapon_name]<br>"
@@ -144,7 +143,7 @@
 		n++
 
 	if(chemtraces.len)
-		scan_data += "<b>Trace Chemicals: </b><br>"
+		scan_data += "<b>Замеченные химикаты: </b><br>"
 		for(var/chemID in chemtraces)
 			scan_data += chemID
 			scan_data += "<br>"
@@ -155,7 +154,7 @@
 	sleep(10)
 
 	var/obj/item/weapon/paper/P = new(usr.loc)
-	P.name = "Autopsy Data ([target_name])"
+	P.name = "Данные вскрытиЯ ([target_name])"
 	P.info = "<tt>[scan_data]</tt>"
 	P.overlays += "paper_words"
 
@@ -186,16 +185,16 @@
 		src.wdata = list()
 		src.chemtraces = list()
 		src.timeofdeath = null
-		user << "\red A new patient has been registered.. Purging data for previous patient."
+		user << "\red Новый пациент был просканирован... СтираютсЯ данные о предыдущем пациенте."
 
 	src.timeofdeath = M.timeofdeath
 
 	var/datum/organ/external/S = M.get_organ(user.zone_sel.selecting)
 	if(!S)
-		usr << "<b>You can't scan this body part.</b>"
+		usr << "<b>Не получаетсЯ просканировать эту часть тела.</b>"
 		return
 	if(!S.open)
-		usr << "<b>You have to cut the limb open first!</b>"
+		usr << "<b>Сначала нужно вскрыть конечность!</b>"
 		return
 	for(var/mob/O in viewers(M))
 		O.show_message("\red [user.name] scans the wounds on [M.name]'s [S.display_name] with \the [src.name]", 1)
