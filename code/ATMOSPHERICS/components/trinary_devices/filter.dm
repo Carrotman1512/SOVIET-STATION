@@ -141,7 +141,7 @@ Filter types:
 			return ..()
 		var/turf/T = src.loc
 		if (level==1 && isturf(T) && T.intact)
-			user << "\red You must remove the plating first."
+			user << "\red Сначала вы должны снЯть покрытие."
 			return 1
 		var/datum/gas_mixture/int_air = return_air()
 		var/datum/gas_mixture/env_air = loc.return_air()
@@ -165,39 +165,39 @@ obj/machinery/atmospherics/trinary/filter/attack_hand(user as mob) // -- TLE
 		return
 
 	if(!src.allowed(user))
-		user << "\red Access denied."
+		user << "\red Доступ запрещен."
 		return
 
 	var/dat
 	var/current_filter_type
 	switch(filter_type)
 		if(0)
-			current_filter_type = "Carbon Molecules"
+			current_filter_type = "Молекулы углерода"
 		if(1)
-			current_filter_type = "Oxygen"
+			current_filter_type = "Кислород"
 		if(2)
-			current_filter_type = "Nitrogen"
+			current_filter_type = "Азот"
 		if(3)
-			current_filter_type = "Carbon Dioxide"
+			current_filter_type = "Углекислый газ"
 		if(4)
-			current_filter_type = "Nitrous Oxide"
+			current_filter_type = "ВеселЯщий газ"
 		if(-1)
-			current_filter_type = "Nothing"
+			current_filter_type = "Ничего"
 		else
-			current_filter_type = "ERROR - Report this bug to the admin, please!"
+			current_filter_type = "ОШИБКА - Пожалуйста сообщите об этом администрации!"
 
 	dat += {"
-			<b>Power: </b><a href='?src=\ref[src];power=1'>[on?"On":"Off"]</a><br>
-			<b>Filtering: </b>[current_filter_type]<br><HR>
-			<h4>Set Filter Type:</h4>
-			<A href='?src=\ref[src];filterset=0'>Carbon Molecules</A><BR>
-			<A href='?src=\ref[src];filterset=1'>Oxygen</A><BR>
-			<A href='?src=\ref[src];filterset=2'>Nitrogen</A><BR>
-			<A href='?src=\ref[src];filterset=3'>Carbon Dioxide</A><BR>
-			<A href='?src=\ref[src];filterset=4'>Nitrous Oxide</A><BR>
-			<A href='?src=\ref[src];filterset=-1'>Nothing</A><BR>
-			<HR><B>Desirable output pressure:</B>
-			[src.target_pressure]kPa | <a href='?src=\ref[src];set_press=1'>Change</a>
+			<b>Электропитание: </b><a href='?src=\ref[src];power=1'>[on?"Включено":"Отключено"]</a><br>
+			<b>ФильтруетсЯ: </b>[current_filter_type]<br><HR>
+			<h4>Фильтровать:</h4>
+			<A href='?src=\ref[src];filterset=0'>Молекулы углерода</A><BR>
+			<A href='?src=\ref[src];filterset=1'>Кислород/A><BR>
+			<A href='?src=\ref[src];filterset=2'>Азот</A><BR>
+			<A href='?src=\ref[src];filterset=3'>Углекислый газ</A><BR>
+			<A href='?src=\ref[src];filterset=4'>ВеселЯщий газ</A><BR>
+			<A href='?src=\ref[src];filterset=-1'>Ничего</A><BR>
+			<HR><B>Желаемое выходное давление:</B>
+			[src.target_pressure]kPa | <a href='?src=\ref[src];set_press=1'>Изменить</a>
 			"}
 /*
 		user << browse("<HEAD><TITLE>[src.name] control</TITLE></HEAD>[dat]","window=atmo_filter")
@@ -205,7 +205,7 @@ obj/machinery/atmospherics/trinary/filter/attack_hand(user as mob) // -- TLE
 		return
 
 	if (src.temp)
-		dat = text("<TT>[]</TT><BR><BR><A href='?src=\ref[];temp=1'>Clear Screen</A>", src.temp, src)
+		dat = text("<TT>[]</TT><BR><BR><A href='?src=\ref[];temp=1'>Очистить экран</A>", src.temp, src)
 	//else
 	//	src.on != src.on
 */
@@ -223,7 +223,7 @@ obj/machinery/atmospherics/trinary/filter/Topic(href, href_list) // -- TLE
 	if (href_list["temp"])
 		src.temp = null
 	if(href_list["set_press"])
-		var/new_pressure = input(usr,"Enter new output pressure (0-4500kPa)","Pressure control",src.target_pressure) as num
+		var/new_pressure = input(usr,"Введите новое выходное давление (0-4500kPa)","Управление давлением",src.target_pressure) as num
 		src.target_pressure = max(0, min(4500, new_pressure))
 	if(href_list["power"])
 		on=!on
