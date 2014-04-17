@@ -270,7 +270,7 @@ obj/machinery/atmospherics/valve
 
 		attack_hand(mob/user as mob)
 			if(!src.allowed(user))
-				user << "\red Access denied."
+				user << "\red Доступ запрещен."
 				return
 			..()
 
@@ -319,7 +319,7 @@ obj/machinery/atmospherics/valve
 			return 1
 		var/turf/T = src.loc
 		if (level==1 && isturf(T) && T.intact)
-			user << "\red You must remove the plating first."
+			user << "\red Сначала вы должны снЯть покрытие."
 			return 1
 		var/datum/gas_mixture/int_air = return_air()
 		var/datum/gas_mixture/env_air = loc.return_air()
