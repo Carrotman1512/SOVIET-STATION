@@ -1,4 +1,3 @@
-
 #define NITROGEN_RETARDATION_FACTOR 4        //Higher == N2 slows reaction more
 #define THERMAL_RELEASE_MODIFIER 10                //Higher == less heat released during reaction
 #define PLASMA_RELEASE_MODIFIER 1500                //Higher == less plasma released by reaction
@@ -27,11 +26,11 @@
 
 	var/damage = 0
 	var/damage_archived = 0
-	var/safe_alert = "Crystaline hyperstructure returning to safe operating levels."
+	var/safe_alert = "Гиперструктура кристалла нормализована."
 	var/warning_point = 100
-	var/warning_alert = "Danger! Crystal hyperstructure instability!"
+	var/warning_alert = "Внимание! Нестабильность гиперструктуры кристалла!"
 	var/emergency_point = 700
-	var/emergency_alert = "CRYSTAL DELAMINATION IMMINENT."
+	var/emergency_alert = "НЕИЗБЕЖНАЯ ДЕЛАМИНАЦИЯ КРИСТАЛЛА!"
 	var/explosion_point = 1000
 
 	var/emergency_issued = 0
@@ -112,15 +111,15 @@
 		if((world.timeofday - lastwarning) / 10 >= WARNING_DELAY)
 
 			if(damage > emergency_point)
-				radio.autosay(emergency_alert, "Supermatter Monitor")
+				radio.autosay(emergency_alert, "Мониторинг суперматерии")
 				lastwarning = world.timeofday
 
 			else if(damage >= damage_archived) // The damage is still going up
-				radio.autosay(warning_alert, "Supermatter Monitor")
+				radio.autosay(warning_alert, "Мониторинг суперматерии")
 				lastwarning = world.timeofday - 150
 
 			else                                                 // Phew, we're safe
-				radio.autosay(safe_alert, "Supermatter Monitor")
+				radio.autosay(safe_alert, "Мониторинг суперматерии")
 				lastwarning = world.timeofday
 
 		if(damage > explosion_point)
@@ -203,11 +202,11 @@
 	if(Adjacent(user))
 		return attack_hand(user)
 	else
-		user << "<span class = \"warning\">You attempt to interface with the control circuits but find they are not connected to your network.  Maybe in a future firmware update.</span>"
+		user << "<span class = \"warning\">Ты пытаешьсЯ подключитьсЯ к суперматерии, но выЯснЯешь, что она не подключена к твоей сети.</span>"
 	return
 
 /obj/machinery/power/supermatter/attack_ai(mob/user as mob)
-	user << "<span class = \"warning\">You attempt to interface with the control circuits but find they are not connected to your network.  Maybe in a future firmware update.</span>"
+	user << "<span class = \"warning\">Ты пытаешьсЯ подключитьсЯ к суперматерии, но выЯснЯешь, что она не подключена к твоей сети.</span>"
 
 /obj/machinery/power/supermatter/attack_hand(mob/user as mob)
 	user.visible_message("<span class=\"warning\">\The [user] reaches out and touches \the [src], inducing a resonance... \his body starts to glow and bursts into flames before flashing into ash.</span>",\
