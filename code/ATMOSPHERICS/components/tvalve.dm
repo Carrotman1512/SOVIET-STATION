@@ -391,7 +391,7 @@ obj/machinery/atmospherics/tvalve/mirrored
 
 		attack_hand(mob/user as mob)
 			if(!src.allowed(user))
-				user << "\red Access denied."
+				user << "\red Доступ запрещен."
 				return
 			..()
 
