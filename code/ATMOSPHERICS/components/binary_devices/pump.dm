@@ -167,7 +167,7 @@ obj/machinery/atmospherics/binary/pump
 		if(href_list["power"])
 			on = !on
 		if(href_list["set_press"])
-			var/new_pressure = input(usr,"ВВедите новое выходное давление (0-4500kPa)","Управление давлением",src.target_pressure) as num
+			var/new_pressure = input(usr,"Введите новое выходное давление (0-4500kPa)","Управление давлением",src.target_pressure) as num
 			src.target_pressure = max(0, min(4500, new_pressure))
 		usr.set_machine(src)
 		src.update_icon()
