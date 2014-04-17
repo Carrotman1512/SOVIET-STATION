@@ -268,12 +268,12 @@
 				if(!C.stat && !C.stunned && !C.paralysis && !C.restrained())
 					if(C.internal)
 						C.internal = null
-						C << "<span class='notice'>No longer running on internals.</span>"
+						C << "<span class='notice'>Воздух теперь беретсЯ из окружающей среды.</span>"
 						if(C.internals)
 							C.internals.icon_state = "internal0"
 					else
 						if(!istype(C.wear_mask, /obj/item/clothing/mask))
-							C << "<span class='notice'>You are not wearing a mask.</span>"
+							C << "<span class='notice'>Вам нужно одеть маску.</span>"
 							return 1
 						else
 							var/list/nicename = null
