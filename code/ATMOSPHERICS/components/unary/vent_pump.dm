@@ -274,22 +274,22 @@
 		if(istype(W, /obj/item/weapon/weldingtool))
 			var/obj/item/weapon/weldingtool/WT = W
 			if (WT.remove_fuel(0,user))
-				user << "\blue Now welding the vent."
+				user << "\blue Завариваем вентиляцию..."
 				if(do_after(user, 20))
 					if(!src || !WT.isOn()) return
 					playsound(src.loc, 'sound/items/Welder2.ogg', 50, 1)
 					if(!welded)
-						user.visible_message("[user] welds the vent shut.", "You weld the vent shut.", "You hear welding.")
+						user.visible_message("[user] заварил вентиляцию.", "Вы заварили вентиляцию.", "Вы слышите, как кто-то что-то заваривает.")
 						welded = 1
 						update_icon()
 					else
-						user.visible_message("[user] unwelds the vent.", "You unweld the vent.", "You hear welding.")
+						user.visible_message("[user] разварил вентиляцию.", "Вы разварили ветиляцию.", "Вы слышите, как кто-то что-то заваривает.")
 						welded = 0
 						update_icon()
 				else
-					user << "\blue The welding tool needs to be on to start this task."
+					user << "\blue Сварка должна быть включена."
 			else
-				user << "\blue You need more welding fuel to complete this task."
+				user << "\blue Не хватает топлива!"
 				return 1
 	examine()
 		set src in oview(1)
@@ -312,7 +312,7 @@
 			return 1
 		var/turf/T = src.loc
 		if (level==1 && isturf(T) && T.intact)
-			user << "\red You must remove the plating first."
+			user << "\red Сначала вы должны снЯть покрытие."
 			return 1
 		var/datum/gas_mixture/int_air = return_air()
 		var/datum/gas_mixture/env_air = loc.return_air()
