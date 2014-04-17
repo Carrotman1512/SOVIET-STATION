@@ -295,7 +295,7 @@
 		set src in oview(1)
 		..()
 		if(welded)
-			usr << "It seems welded shut."
+			usr << "Кто-то заварил это."
 
 	power_change()
 		if(powered(power_channel))
