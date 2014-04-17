@@ -25,7 +25,7 @@ datum/controller/vote
 			// No more change mode votes after the game has started.
 			// 3 is GAME_STATE_PLAYING, but that #define is undefined for some reason
 			if(mode == "gamemode" && ticker.current_state >= 2)
-				world << "<b>Voting aborted due to game start.</b>"
+				world << "<b>Голосование отменено в свЯзи со стартом игры.</b>"
 				src.reset()
 				return
 
@@ -126,7 +126,7 @@ datum/controller/vote
 		if(winners.len > 0)
 			if(winners.len > 1)
 				if(mode != "gamemode" || ticker.hide_mode == 0) // Here we are making sure we don't announce potential game modes
-					text = "<b>Vote Tied Between:</b>\n"
+					text = "<b>Результат выбираетсЯ между:</b>\n"
 					for(var/option in winners)
 						text += "\t[option]\n"
 			. = pick(winners)
@@ -135,15 +135,15 @@ datum/controller/vote
 				if(choices[current_votes[key]] == .)
 					round_voters += key // Keep track of who voted for the winning round.
 			if((mode == "gamemode" && . == "extended") || ticker.hide_mode == 0) // Announce Extended gamemode, but not other gamemodes
-				text += "<b>Vote Result: [.]</b>"
+				text += "<b>Результат голосованиЯ: [.]</b>"
 			else
 				if(mode != "gamemode")
-					text += "<b>Vote Result: [.]</b>"
+					text += "<b>Результат голосованиЯ: [.]</b>"
 				else
-					text += "<b>The vote has ended.</b>" // What will be shown if it is a gamemode vote that isn't extended
+					text += "<b>Голосование окончено.</b>" // What will be shown if it is a gamemode vote that isn't extended
 
 		else
-			text += "<b>Vote Result: Inconclusive - No Votes!</b>"
+			text += "<b>Результат голосованиЯ: Никакой (Нет голосов).</b>"
 		log_vote(text)
 		world << "<font color='purple'>[text]</font>"
 		return .
@@ -165,14 +165,14 @@ datum/controller/vote
 							master_mode = .
 					if(!going)
 						going = 1
-						world << "<font color='red'><b>The round will start soon.</b></font>"
+						world << "<font color='red'><b>Раунд скоро начнетсЯ.</b></font>"
 				if("crew_transfer")
 					if(. == "Initiate Crew Transfer")
 						init_shift_change(null, 1)
 
 
 		if(restart)
-			world << "World restarting due to vote..."
+			world << "Происходит рестарт мира в свЯзи с голосованием..."
 			feedback_set_details("end_error","restart vote")
 			if(blackbox)	blackbox.save_all_data_to_sql()
 			sleep(50)
@@ -215,11 +215,11 @@ datum/controller/vote
 						choices.Add("Initiate Crew Transfer", "Continue The Round")
 					else
 						if (get_security_level() == "red" || get_security_level() == "delta")
-							initiator_key << "The current alert status is too high to call for a crew transfer!"
+							initiator_key << "Ошибка: Уровень тревоги слишком высокий, чтобы начать транспортировку персонала!"
 							return 0
 						if(ticker.current_state <= 2)
 							return 0
-							initiator_key << "The crew transfer button has been disabled!"
+							initiator_key << "Кнопка "Транспортировка персонала" была отключена!"
 						question = "End the shift?"
 						choices.Add("Initiate Crew Transfer", "Continue The Round")
 				if("custom")
@@ -248,7 +248,7 @@ datum/controller/vote
 					world << sound('sound/ambience/alarm4.ogg')
 			if(mode == "gamemode" && going)
 				going = 0
-				world << "<font color='red'><b>Round start has been delayed.</b></font>"
+				world << "<font color='red'><b>Начало раунда было отменено.</b></font>"
 		/*	if(mode == "crew_transfer" && ooc_allowed)
 				auto_muted = 1
 				ooc_allowed = !( ooc_allowed )
