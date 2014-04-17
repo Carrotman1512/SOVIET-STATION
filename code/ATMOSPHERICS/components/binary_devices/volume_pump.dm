@@ -158,7 +158,7 @@ obj/machinery/atmospherics/binary/volume_pump
 		if(href_list["power"])
 			on = !on
 		if(href_list["set_transfer_rate"])
-			var/new_transfer_rate = input(usr,"Enter new output volume (0-200l/s)","Flow control",src.transfer_rate) as num
+			var/new_transfer_rate = input(usr,"Введите новый выходной объем (0-200l/s)","Управление потоком",src.transfer_rate) as num
 			src.transfer_rate = max(0, min(200, new_transfer_rate))
 		usr.set_machine(src)
 		src.update_icon()
