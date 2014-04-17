@@ -110,9 +110,9 @@ obj/machinery/atmospherics/binary/pump
 			return 1
 
 	interact(mob/user as mob)
-		var/dat = {"<b>Power: </b><a href='?src=\ref[src];power=1'>[on?"On":"Off"]</a><br>
-					<b>Desirable output pressure: </b>
-					[round(target_pressure,0.1)]kPa | <a href='?src=\ref[src];set_press=1'>Change</a>
+		var/dat = {"<b>Электропитание: </b><a href='?src=\ref[src];power=1'>[on?"Включено":"Отключено"]</a><br>
+					<b>Желаемое выходное давление: </b>
+					[round(target_pressure,0.1)]kPa | <a href='?src=\ref[src];set_press=1'>Изменить</a>
 					"}
 
 		user << browse("<HEAD><TITLE>[src.name] control</TITLE></HEAD><TT>[dat]</TT>", "window=atmo_pump")
@@ -156,7 +156,7 @@ obj/machinery/atmospherics/binary/pump
 			return
 		src.add_fingerprint(usr)
 		if(!src.allowed(user))
-			user << "\red Access denied."
+			user << "\red Доступ запрещен."
 			return
 		usr.set_machine(src)
 		interact(user)
@@ -167,7 +167,7 @@ obj/machinery/atmospherics/binary/pump
 		if(href_list["power"])
 			on = !on
 		if(href_list["set_press"])
-			var/new_pressure = input(usr,"Enter new output pressure (0-4500kPa)","Pressure control",src.target_pressure) as num
+			var/new_pressure = input(usr,"ВВедите новое выходное давление (0-4500kPa)","Управление давлением",src.target_pressure) as num
 			src.target_pressure = max(0, min(4500, new_pressure))
 		usr.set_machine(src)
 		src.update_icon()
@@ -186,7 +186,7 @@ obj/machinery/atmospherics/binary/pump
 			return 1
 		var/turf/T = src.loc
 		if (level==1 && isturf(T) && T.intact)
-			user << "\red You must remove the plating first."
+			user << "\red Сначала вы должны снЯть покрытие."
 			return 1
 		var/datum/gas_mixture/int_air = return_air()
 		var/datum/gas_mixture/env_air = loc.return_air()
