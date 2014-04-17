@@ -54,9 +54,9 @@ mob/proc/airflow_stun()
 		return 0
 	if(last_airflow_stun > world.time - vsc.airflow_stun_cooldown)	return 0
 	if(!(status_flags & CANSTUN) && !(status_flags & CANWEAKEN))
-		src << "\blue You stay upright as the air rushes past you."
+		src << "\blue Ты выдерживаешь внезапный поток воздуха."
 		return 0
-	if(weakened <= 0) src << "\red The sudden rush of air knocks you over!"
+	if(weakened <= 0) src << "\red Внезапный поток воздуха уносит тебЯ!"
 	weakened = max(weakened,5)
 	last_airflow_stun = world.time
 
@@ -72,9 +72,9 @@ mob/living/carbon/human/airflow_stun()
 	if(shoes)
 		if(shoes.flags & NOSLIP) return 0
 	if(!(status_flags & CANSTUN) && !(status_flags & CANWEAKEN))
-		src << "\blue You stay upright as the air rushes past you."
+		src << "\blue Ты выдерживаешь внезапный поток воздуха."
 		return 0
-	if(weakened <= 0) src << "\red The sudden rush of air knocks you over!"
+	if(weakened <= 0) src << "\red Внезапный поток воздуха уносит тебЯ!"
 	weakened = max(weakened,rand(1,5))
 	last_airflow_stun = world.time
 
@@ -251,7 +251,7 @@ proc/AirflowSpace(zone/A)
 				if(istype(src:shoes, /obj/item/clothing/shoes/magboots))
 					if(src:shoes:magpulse)
 						return
-		src << "\red You are sucked away by airflow!"
+		src << "\red Внезапный поток воздуха засосал тебя!"
 	var/airflow_falloff = 9 - ul_FalloffAmount(airflow_dest) //It's a fast falloff calc.  Very useful.
 	if(airflow_falloff < 1)
 		airflow_dest = null
@@ -315,7 +315,7 @@ proc/AirflowSpace(zone/A)
 				if(istype(src:shoes, /obj/item/clothing/shoes/magboots))
 					if(src:shoes.flags & NOSLIP)
 						return
-		src << "\red You are pushed away by airflow!"
+		src << "\red Внезапный поток воздуха опрокидывает тебЯ!"
 		last_airflow = world.time
 	var/airflow_falloff = 9 - ul_FalloffAmount(airflow_dest) //It's a fast falloff calc.  Very useful.
 	if(airflow_falloff < 1)
