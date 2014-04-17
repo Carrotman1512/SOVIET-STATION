@@ -55,7 +55,7 @@ datum/shuttle_controller/proc/recall()
 		if(alert == 0)
 			if(timeleft >= 600)
 				return
-			captain_announce("The emergency shuttle has been recalled.")
+			captain_announce("Аварийный шаттл был отменен. Зарплата всех сотрудников будет урезана из-за такой дорогостоЯщей процедуры.")
 			world << sound('sound/AI/shuttlerecalled.ogg')
 			setdirection(-1)
 			online = 1
@@ -64,7 +64,7 @@ datum/shuttle_controller/proc/recall()
 					A.readyreset()
 			return
 		else //makes it possible to send shuttle back.
-			captain_announce("The shuttle has been recalled.")
+			captain_announce("Аварийный шаттл был отменен. Зарплата всех сотрудников будет урезана из-за такой дорогостоЯщей процедуры.")
 			setdirection(-1)
 			online = 1
 			alert = 0 // set alert back to 0 after an admin recall
@@ -284,7 +284,7 @@ datum/shuttle_controller/emergency_shuttle/process()
 				start_location.move_contents_to(end_location)
 				settimeleft(SHUTTLELEAVETIME)
 				//send2irc("Server", "The Emergency Shuttle has docked with the station.")
-				captain_announce("The Emergency Shuttle has docked with the station. You have [round(timeleft()/60,1)] minutes to board the Emergency Shuttle.")
+				captain_announce("Аварийный шаттл произвел стыковку со станцией. У персонала есть [round(timeleft()/60,1)] минут, чтобы совершить посадку.")
 				world << sound('sound/AI/shuttledock.ogg')
 
 				return 1
@@ -415,7 +415,7 @@ datum/shuttle_controller/emergency_shuttle/process()
 						if(!M.buckled)
 							M.Weaken(5)
 
-				captain_announce("The Emergency Shuttle has left the station. Estimate [round(timeleft()/60,1)] minutes until the shuttle docks at Central Command.")
+				captain_announce("Аварийный шаттл покинул станцию. Через [round(timeleft()/60,1)] минут шаттл совершит стыковку с Центральным Командованием.")
 
 				return 1
 
